@@ -1,8 +1,8 @@
-# Project guardrails prompt (v1.0)
+# Project guardrails prompt (v1.1)
 
 <!--
 Paste everything below the line into Claude Code (or another coding agent) at the
-start of a NEW project, from inside the project's folder. Fill in the three
+start of a NEW project, from inside the project's folder. Fill in the two
 [BRACKETED] lines first. See README.md for what you need installed beforehand.
 Licensed under CC BY 4.0: https://github.com/msarro/AI_Repo_Setup_Prompt
 -->
@@ -13,7 +13,6 @@ Licensed under CC BY 4.0: https://github.com/msarro/AI_Repo_Setup_Prompt
 
 - What I'm building: [ONE OR TWO SENTENCES]
 - Where the code lives: [GITHUB REPOSITORY URL]
-- My organization's single sign-on, if people will sign in: [FOR EXAMPLE: MICROSOFT ENTRA, OKTA, GOOGLE, OR "NO SIGN-IN"]
 
 ## How to work with me
 
@@ -29,9 +28,19 @@ Before you change anything, ask me all of your questions at once. Include at lea
 - Which language and tools? If I have no preference, pick the simplest that fits and
   record why.
 
-This prompt assumes the code is on GitHub. If it is somewhere else, use that platform's own
-command-line tool (for example `glab` for GitLab or `tea` for Gitea and Forgejo), or ask me
-to do the step in the web interface.
+Never ask me to paste passwords, keys, tokens or sign-in details into this conversation.
+If something needs one, tell me where to put it myself.
+
+Do not assume I have any tools installed or know how to use them. First check what I have
+(git, a GitHub account, and the GitHub command-line tool `gh`), then:
+
+- If `gh` is missing, ask whether I want your help installing it and signing in (one
+  command, then a login in my web browser), or whether I would rather do the GitHub steps
+  myself in my web browser.
+- If I choose the browser, give me numbered, click-by-click steps for each GitHub step,
+  and help me confirm it worked before you continue.
+- Never install anything without asking me first.
+- If the code is not on GitHub, tell me, and use that platform's equivalent steps.
 
 Then set up the project as described below **before writing any features**.
 
@@ -139,9 +148,11 @@ Keep two things separate, and record each in a decision record:
 
 ## 9. Sign-in and roles
 
-If people sign in, use my organization's single sign-on (named above). Define the app's
-roles and what each can do in the app itself, with tests, then map people to roles
-through single sign-on groups or manual assignment. Never store passwords in the app.
+If people will need to sign in to the app, stop and tell me before building it. Sign-in
+must use my organization's single sign-on, set up together with my IT or security team.
+Never store passwords in the app. Once sign-in is arranged, define the app's roles and what
+each can do in the app itself, with tests, and map people to roles through single sign-on
+groups or manual assignment.
 
 ## 10. Documentation (both kinds are required)
 
