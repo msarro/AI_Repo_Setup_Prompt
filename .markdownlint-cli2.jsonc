@@ -1,0 +1,10 @@
+// Markdown rules for this repository. Long lines are allowed: the prompt is wrapped by hand.
+{
+  "config": {
+    "default": true,
+    "MD013": false
+  },
+  // These two files cannot start with a heading by design: CLAUDE.md must contain only
+  // "@AGENTS.md", and the pull request template must start with "Closes #".
+  "ignores": ["CLAUDE.md", ".github/pull_request_template.md"]
+}
