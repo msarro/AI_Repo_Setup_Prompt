@@ -20,25 +20,31 @@ push to main being rejected.
 
 ## Before you start
 
-- **git** and a **GitHub account**.
-- The **GitHub command-line tool**, signed in: `gh auth login`. The agent uses it to create
-  issues and pull requests and to lock your main branch. **It acts as you, with your
-  permissions.**
+- **git** and a **GitHub account**. Sending code to GitHub needs you to be signed in on
+  your computer; the agent walks you through it.
 - A **new repository** that you administer. On GitHub Free, branch protection works only on
   **public** repositories; private repositories need a paid plan.
+- **Optional:** the **GitHub command-line tool** (`gh`). With it, the agent can create issues
+  and pull requests and lock your main branch for you. **It acts as you, with your
+  permissions.** Without it, the agent gives you click-by-click steps for the GitHub
+  website instead. Either way, the agent checks what you have and asks before installing
+  anything.
 - An AI coding agent such as **Claude Code**, started inside the project's folder.
 - The agent may need to install tools (for example a language runtime or the gitleaks
   secret scanner). It should ask you first.
 
 ## How to use it
 
-1. Open [`PROMPT.md`](PROMPT.md), copy everything below the line, and fill in the three
-   `[BRACKETED]` lines.
+1. Open [`PROMPT.md`](PROMPT.md), copy everything below the line, and fill in the two
+   `[BRACKETED]` lines: what you are building, and where the code lives.
 2. Paste it into your agent as the first message in the new project.
 3. Answer its questions carefully. How the software will be used decides which dependency
    licenses are allowed.
 4. Review and merge its pull requests yourself. The agent never merges.
-5. If you work alone, consider a colleague or a second account as a reviewer. Otherwise
+5. **Never paste passwords, keys, tokens or sign-in details into the chat.** If the agent
+   needs one, it should tell you where to put it yourself. If your app needs people to sign
+   in, involve your IT or security team.
+6. If you work alone, consider a colleague or a second account as a reviewer. Otherwise
    "review" means reading your own pull requests.
 
 ## What it does not do for you
@@ -59,7 +65,7 @@ make its own edition by changing a few lines, for example to name:
 - its code hosting platform and that platform's command-line tool
 - its secrets manager, and the client the agent should use to read secrets from it
 - its dependency-update bot (Dependabot, Renovate, or another)
-- its single sign-on system and approval rules
+- who sets up sign-in (for example, the IT or security team), and its approval rules
 - internal standards documents, such as security foundations or SBOM instructions, for
   the agent to read and follow
 
@@ -97,5 +103,9 @@ as long as you give credit, for example:
 
 ## Versions
 
+- **1.1**: the GitHub command-line tool is optional (the agent checks what you have and
+  offers browser steps); the sign-in fill-in line is removed; new rule never to paste
+  passwords, keys, tokens or sign-in details into the chat. The `prompt` check enforces
+  both.
 - **1.0**: first public edition, from the Runny Hound 2 lecture demonstration. Includes
   dependency-update pull requests (Dependabot or Renovate) and a weekly vulnerability scan.

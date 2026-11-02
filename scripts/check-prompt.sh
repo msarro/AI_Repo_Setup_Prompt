@@ -17,9 +17,15 @@ if [ ! -f "$prompt" ]; then
 fi
 
 # 1. The fill-in lines people must complete are still there.
-for label in "What I'm building: [" "Where the code lives: [" "if people will sign in: ["; do
+for label in "What I'm building: [" "Where the code lives: ["; do
   grep -qF -- "$label" "$prompt" || problem "the fill-in line \"$label...]\" is missing"
 done
+
+# 1b. No fill-in line asks for sign-in or secret details: people would paste them into an
+# AI service. Sign-in is arranged with the IT or security team instead.
+if grep -inE '(sign-on|sign-in|sign in|login|log in|password|tenant|secret|token)[^[]*: \[' "$prompt" >&2; then
+  problem "a fill-in line asks for sign-in or secret details"
+fi
 
 # 2. Section numbers run 1, 2, 3, ... with no gaps; "5a" may only follow "5".
 if ! awk '
@@ -52,6 +58,7 @@ done <<'RULES'
 Never approve or merge a pull request yourself
 Never weaken, skip or delete a test
 Never write passwords, keys or tokens
+Never ask me to paste
 wait for my OK
 Never create tokens yourself
 Never work around a rule

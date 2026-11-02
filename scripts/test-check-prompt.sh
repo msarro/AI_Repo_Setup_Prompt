@@ -56,5 +56,13 @@ fresh
 mutate '!/Never approve or merge a pull request yourself/'
 expect fail "a deleted safety rule is caught"
 
+fresh
+mutate '!/Never ask me to paste/'
+expect fail "a deleted no-pasting rule is caught"
+
+fresh
+mutate '{ print } /Where the code lives: \[/ { print "- My organization'"'"'s single sign-on: [NAME]" }'
+expect fail "a fill-in line asking for sign-in details is caught"
+
 echo "$passed passed, $failed failed"
 [ "$failed" -eq 0 ]
